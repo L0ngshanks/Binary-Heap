@@ -123,30 +123,31 @@ int main(int argc, char** argv)
 	// TEST 4 - if this compiles, your code is wrong...
 	// take another look at the type of inheritance you are using
 	////////////////////////////////////////////////////////////////////////////////////////////
-/*	cout << "\n*** TEST 4 ***\n";
-	heap.clear();
+	//cout << "\n*** TEST 4 ***\n";
+	//heap.clear();
 
-	heap.append(9);
-	heap.append(8);
-	heap.append(7);
-	heap.append(0);
-	heap.append(6);
-	heap.append(5);
-	heap.append(4);
-	heap.append(1);
-	heap.append(2);
-	heap.append(3);
+	//heap.append(9);
+	//heap.append(8);
+	//heap.append(7);
+	//heap.append(0);
+	//heap.append(6);
+	//heap.append(5);
+	//heap.append(4);
+	//heap.append(1);
+	//heap.append(2);
+	//heap.append(3);
 
-	printHeap(heap);
+	//printHeap(heap);
 
-	while(heap.size() > 0)
-	{
-		cout << "Dequeue : " << heap.dequeue() << " : ";
-		printHeap(heap);
-	}
-*/
+	//while(heap.size() > 0)
+	//{
+	//	cout << "Dequeue : " << heap.dequeue() << " : ";
+	//	printHeap(heap);
+	//}
+
 	////////////////////////////////////////////////////////////////////////////////////////////
 	// Complete
 	////////////////////////////////////////////////////////////////////////////////////////////
+	system("pause");
 	return 0;
 }

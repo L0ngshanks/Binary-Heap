@@ -3,11 +3,10 @@
 
 template<class T>
 class BinaryHeap :
-	public DynArray<T>
+	protected DynArray<T>
 {
 public:
-	BinaryHeap();
-	~BinaryHeap();
+
 
 	/////////////////////////////////////////////////////////////////////////////
 // Function : enqueue
@@ -19,18 +18,19 @@ public:
 	{
 		DynArray<T>::append(v);
 		T temp;
-		for (unsigned int i = 0; i < size()-1; ++i)
+		for (unsigned int i = size()-1; i > 0;)
 		{
 			int parent = (i - 1) / 2;
-			if (i > 0)
+			if (DynArray<T>::array[i] < DynArray<T>::array[parent])
 			{
-				if (DynArray<T>::array[i] < DynArray<T>::array[parent])
-				{
-					temp = DynArray<T>::array[i];
-					DynArray<T>::array[i] = DynArray<T>::array[parent];
-					DynArray<T>::array[parent] = temp;
-				}
+				temp = DynArray<T>::array[i];
+				DynArray<T>::array[i] = DynArray<T>::array[parent];
+				DynArray<T>::array[parent] = temp;
+
+				i = parent;
 			}
+			else
+				break;
 		}
 	}
 
@@ -42,7 +42,60 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	T dequeue()
 	{
+		T temp;
+		T top = DynArray<T>::array[0];
+		DynArray<T>::array[0] = DynArray<T>::array[size() - 1];
+		DynArray<T>::Size--;
+		for (unsigned int i = 0; i < size();)
+		{
+			unsigned int left = (i * 2) + 1;
+			unsigned int right = (i * 2) + 2;
+			if (left >= size())
+				break;
+			else if (right >= size())
+			{
+				if (DynArray<T>::array[i] > DynArray<T>::array[left])
+				{
+					temp = DynArray<T>::array[i];
+					DynArray<T>::array[i] = DynArray<T>::array[left];
+					DynArray<T>::array[left] = temp;
 
+					i = left;
+				}
+				else
+					break;
+			}
+			else
+			{
+				if (DynArray<T>::array[left] < DynArray<T>::array[right])
+				{
+					if (DynArray<T>::array[i] > DynArray<T>::array[left])
+					{
+						temp = DynArray<T>::array[i];
+						DynArray<T>::array[i] = DynArray<T>::array[left];
+						DynArray<T>::array[left] = temp;
+
+						i = left;
+					}
+					else
+						break;
+				}
+				else
+				{
+					if (DynArray<T>::array[i] > DynArray<T>::array[right])
+					{
+						temp = DynArray<T>::array[i];
+						DynArray<T>::array[i] = DynArray<T>::array[right];
+						DynArray<T>::array[right] = temp;
+
+						i = right;
+					}
+					else
+						break;
+				}
+			}
+		}
+		return top;
 	}
 
 	///////////////////////////////////////////////////////////////////////////////
@@ -61,8 +114,8 @@ public:
 	/////////////////////////////////////////////////////////////////////////////
 	void clear()
 	{
-		delete[] DynArray<T>::array;
-		DynArray<T>::array = nullptr;
+		
+		DynArray<T>::clear();
 	}
 
 	///////////////////////////////////////////////////////////////////////////////
